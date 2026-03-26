@@ -11,11 +11,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 
 /**
  * Props for the SearchCommand component
@@ -146,67 +141,58 @@ export const SearchCommand = <T,>({
 
   return (
     <div className="w-full relative">
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <div>
-            <Command 
-              className="rounded-lg border shadow-md"
-              shouldFilter={false}
-            >
-              <CommandInput 
-                ref={inputRef}
-                placeholder={placeholder}
-                value={searchQuery}
-                onValueChange={handleSearch}
-                onKeyDown={(e) => {
-                  if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Enter') {
-                    e.stopPropagation()
-                  }
-                }}
-              />
-            </Command>
-          </div>
-        </PopoverTrigger>
-        <PopoverContent 
-          className="w-[--radix-popover-trigger-width] p-0" 
-          align="start"
-          onOpenAutoFocus={(e) => e.preventDefault()}
-        >
-          {(items.length > 0 || loading) && (
-            <Command shouldFilter={false}>
-              <CommandList>
-                <CommandGroup>
-                  {loading ? (
-                    <CommandItem disabled className="flex items-center gap-2 py-6 justify-center">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Searching...
+      <Command 
+        className="rounded-lg border shadow-md"
+        shouldFilter={false}
+      >
+        <CommandInput 
+          ref={inputRef}
+          placeholder={placeholder}
+          value={searchQuery}
+          onValueChange={handleSearch}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Enter') {
+              e.stopPropagation()
+            }
+          }}
+        />
+      </Command>
+
+      {open && (items.length > 0 || loading) && (
+        <div className="absolute z-50 mt-1 w-full rounded-md border bg-popover text-popover-foreground shadow-md">
+          <Command shouldFilter={false}>
+            <CommandList>
+              <CommandGroup>
+                {loading ? (
+                  <CommandItem disabled className="flex items-center gap-2 py-6 justify-center">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Searching...
+                  </CommandItem>
+                ) : items.length === 0 ? (
+                  <CommandItem disabled>{noResultsText}</CommandItem>
+                ) : (
+                  items.map((item) => (
+                    <CommandItem
+                      key={getItemId(item)}
+                      value={getItemId(item)}
+                      onSelect={() => handleSelect(item)}
+                      onMouseMove={() => inputRef.current?.focus()}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          selectedItem && getItemId(selectedItem) === getItemId(item) ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {getItemLabel(item)}
                     </CommandItem>
-                  ) : items.length === 0 ? (
-                    <CommandItem disabled>{noResultsText}</CommandItem>
-                  ) : (
-                    items.map((item) => (
-                      <CommandItem
-                        key={getItemId(item)}
-                        value={getItemId(item)}
-                        onSelect={() => handleSelect(item)}
-                        onMouseMove={() => inputRef.current?.focus()}
-                      >
-                        <Check
-                          className={cn(
-                            "mr-2 h-4 w-4",
-                            selectedItem && getItemId(selectedItem) === getItemId(item) ? "opacity-100" : "opacity-0"
-                          )}
-                        />
-                        {getItemLabel(item)}
-                      </CommandItem>
-                    ))
-                  )}
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          )}
-        </PopoverContent>
-      </Popover>
+                  ))
+                )}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </div>
+      )}
     </div>
   )
 }

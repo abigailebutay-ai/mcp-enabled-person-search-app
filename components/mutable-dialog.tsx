@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm, UseFormReturn, FieldValues, DefaultValues } from 'react-hook-form';
 import { Button } from "@/components/ui/button";
 import {
@@ -47,6 +48,7 @@ export default function MutableDialog<T extends FieldValues>({
   submitButtonLabel = defaultValues ? 'Save' : 'Add',
 }: GenericDialogProps<T>) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   const form = useForm<T>({
     resolver: async (values) => {
@@ -95,6 +97,8 @@ export default function MutableDialog<T extends FieldValues>({
         description: toastMessage,
         variant: "default",
       });
+      setOpen(false);
+      router.refresh();
     } else {
       const toastMessage = actions.message;
       console.log('toastMessage:', toastMessage);
@@ -104,7 +108,6 @@ export default function MutableDialog<T extends FieldValues>({
         variant: "destructive",
       });
     }
-    setOpen(false);
   }
 
   return (
