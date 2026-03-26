@@ -1,7 +1,6 @@
 // app/components/user-dialog.tsx
 'use client'
 
-import {  addUser } from '@/app/actions/actions'
 import { userFormSchema, User, UserFormData } from '@/app/actions/schemas'
 
 import { UserForm } from './user-form'
@@ -11,7 +10,24 @@ import MutableDialog, { ActionState }  from '@/components/mutable-dialog'
 export function UserDialog() {
   const handleAddUser = async (data: UserFormData): Promise<ActionState<User>> => {
     try {
-      const newUser = await addUser(data)
+      const response = await fetch('/api/people', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      const payload = await response.json()
+
+      if (!response.ok) {
+        return {
+          success: false,
+          message: payload.error || 'Failed to add user'
+        }
+      }
+
+      const newUser = payload as User
       return {
         success: true,
         message: `User ${newUser.name} added successfully`,

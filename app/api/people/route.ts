@@ -4,6 +4,24 @@ import { searchUsers, addUser, updateUser, deleteUser, getUserById } from '@/app
 
 export const dynamic = 'force-dynamic'
 
+function getErrorMessage(error: unknown): string {
+  const e = error as { code?: string; message?: string }
+
+  if (e?.code === 'P2002') {
+    return 'Email already exists. Please use a different email.'
+  }
+
+  if (e?.code === 'P2025') {
+    return 'User not found.'
+  }
+
+  if (typeof e?.message === 'string' && e.message.length > 0) {
+    return e.message
+  }
+
+  return 'Internal server error'
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const query = searchParams.get('query')
@@ -33,7 +51,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(newUser, { status: 201 })
   } catch (error) {
     console.error('Error creating user:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    const message = getErrorMessage(error)
+    const status = message.includes('exists') ? 409 : 400
+    return NextResponse.json({ error: message }, { status })
   }
 }
 
@@ -50,7 +70,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(updatedUser)
   } catch (error) {
     console.error('Error updating user:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    const message = getErrorMessage(error)
+    const status = message === 'User not found.' ? 404 : 400
+    return NextResponse.json({ error: message }, { status })
   }
 }
 
@@ -67,6 +89,8 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: 'User deleted successfully' })
   } catch (error) {
     console.error('Error deleting user:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    const message = getErrorMessage(error)
+    const status = message === 'User not found.' ? 404 : 400
+    return NextResponse.json({ error: message }, { status })
   }
 }
