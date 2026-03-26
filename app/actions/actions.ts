@@ -7,17 +7,25 @@ import { User, userSchema } from './schemas'
 import { prisma } from '@/lib/prisma'
 
 export async function searchUsers(query: string): Promise<User[]> {
-    console.log('Searching users with query:', query)
-    const results = await prisma.user.findMany({
-        where: {
-            name: {
-                startsWith: query,
-                mode: 'insensitive'
+    try {
+        console.log('Searching users with query:', query)
+        const results = await prisma.user.findMany({
+            where: {
+                name: {
+                    startsWith: query,
+                    mode: 'insensitive'
+                }
             }
+        })
+        console.log('Search results:', results)
+        return results
+    } catch (error: any) {
+        if (error?.code === 'P1011' || !process.env.DATABASE_URL) {
+            console.warn('Database not available during build')
+            return []
         }
-    })
-    console.log('Search results:', results)
-    return results
+        throw error
+    }
 }
 
 export async function addUser(data: Omit<User, 'id'>): Promise<User> {

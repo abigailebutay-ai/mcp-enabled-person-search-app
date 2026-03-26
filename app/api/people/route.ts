@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { User } from '@/app/actions/schemas'
 import { searchUsers, addUser, updateUser, deleteUser, getUserById } from '@/app/actions/actions'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const query = searchParams.get('query')
