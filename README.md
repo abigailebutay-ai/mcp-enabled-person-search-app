@@ -99,14 +99,14 @@ Add your screenshots in this folder:
 
 Required screenshots you need:
 
-1. App CRUD screen (main app showing create/read/update/delete UI)
-2. MCP setup screen (`/mcp-setup` page)
-3. MCP demo screen (`/mcp-demo` page with successful operation)
-4. Claude Desktop calling `create_person` successfully
-5. Claude Desktop calling `get_person` successfully
-6. Claude Desktop calling `update_person` successfully
-7. Claude Desktop calling `delete_person` successfully
-8. App screen showing MCP changes reflected in app data
+<img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/fd4ec946-d411-41fb-845a-0ceac4c250f7" />
+<img width="1919" height="1018" alt="image" src="https://github.com/user-attachments/assets/20db4ba4-16e8-4bb3-8bb6-574aef4043ef" />
+<img width="1919" height="1016" alt="image" src="https://github.com/user-attachments/assets/9f843568-d1d3-47be-83a5-719e053da364" />
+<img width="1919" height="1021" alt="image" src="https://github.com/user-attachments/assets/46614ce2-25f3-4b34-881e-61fb8b8ac6a9" />
+<img width="1919" height="1022" alt="image" src="https://github.com/user-attachments/assets/f88dc38d-fa5d-4107-b9ee-be4261a48754" />
+<img width="1919" height="1022" alt="image" src="https://github.com/user-attachments/assets/5e24e40d-48f4-46e8-8bb6-438cc1d5778c" />
+<img width="1511" height="683" alt="image" src="https://github.com/user-attachments/assets/34c3f81b-4663-4852-82c1-71c633312f84" />
+
 
 Replace each `TODO` image path below with your real screenshot filename:
 
