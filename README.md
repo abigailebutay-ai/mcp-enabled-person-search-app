@@ -91,6 +91,38 @@ This repository includes an MCP server that allows Claude Desktop to perform Per
 - `update_person`
 - `delete_person`
 
+## Evaluation Screenshots
+
+Add your screenshots in this folder:
+
+- `public/screenshots/`
+
+Required screenshots you need:
+
+1. App CRUD screen (main app showing create/read/update/delete UI)
+2. MCP setup screen (`/mcp-setup` page)
+3. MCP demo screen (`/mcp-demo` page with successful operation)
+4. Claude Desktop calling `create_person` successfully
+5. Claude Desktop calling `get_person` successfully
+6. Claude Desktop calling `update_person` successfully
+7. Claude Desktop calling `delete_person` successfully
+8. App screen showing MCP changes reflected in app data
+
+Replace each `TODO` image path below with your real screenshot filename:
+
+```md
+### Week 4 Evidence
+
+![1. App CRUD Screen](public/screenshots/TODO-app-crud.png)
+![2. MCP Setup Page](public/screenshots/TODO-mcp-setup.png)
+![3. MCP Demo Page](public/screenshots/TODO-mcp-demo.png)
+![4. Claude Create Person](public/screenshots/TODO-claude-create.png)
+![5. Claude Get Person](public/screenshots/TODO-claude-get.png)
+![6. Claude Update Person](public/screenshots/TODO-claude-update.png)
+![7. Claude Delete Person](public/screenshots/TODO-claude-delete.png)
+![8. MCP Changes Visible In App](public/screenshots/TODO-mcp-reflect-app.png)
+```
+
 ## How It Works (Next.js 16 & React 19.2)
 
 ### Key Changes in `UserSearch` Component
