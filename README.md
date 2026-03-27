@@ -93,12 +93,6 @@ This repository includes an MCP server that allows Claude Desktop to perform Per
 
 ## Evaluation Screenshots
 
-Add your screenshots in this folder:
-
-- `public/screenshots/`
-
-Required screenshots you need:
-
 <img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/fd4ec946-d411-41fb-845a-0ceac4c250f7" />
 <img width="1919" height="1018" alt="image" src="https://github.com/user-attachments/assets/20db4ba4-16e8-4bb3-8bb6-574aef4043ef" />
 <img width="1919" height="1016" alt="image" src="https://github.com/user-attachments/assets/9f843568-d1d3-47be-83a5-719e053da364" />
