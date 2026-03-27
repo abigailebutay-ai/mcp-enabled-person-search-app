@@ -1,13 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
+
+const emptySubscribe = () => () => {}
 
 export default function ClientOnly({ children }: { children: React.ReactNode }) {
-  const [hasMounted, setHasMounted] = useState(false)
-
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
+  const hasMounted = useSyncExternalStore(emptySubscribe, () => true, () => false)
 
   if (!hasMounted) {
     return null

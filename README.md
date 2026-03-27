@@ -17,6 +17,10 @@ The upgrade to Next.js 16 builds upon the async API changes from Next.js 15, wit
 - Custom fonts (Geist Sans and Geist Mono)
 - Improved type safety with TypeScript
 - Modular and reusable component architecture
+- Full database-backed Person CRUD operations (Create, Read, Update, Delete)
+- MCP server for Person CRUD via Claude Desktop
+- Real-time MCP CRUD testing page at `/mcp-demo`
+- Step-by-step setup guide at `/mcp-setup`
 
 ## Technologies Used
 
@@ -67,7 +71,25 @@ pnpm dev
 pnpm build    # Build for production
 pnpm start    # Start production server
 pnpm lint     # Run ESLint
+pnpm mcp:server # Run MCP Person CRUD server
 ```
+
+## MCP Integration
+
+This repository includes an MCP server that allows Claude Desktop to perform Person CRUD operations directly against the same PostgreSQL database used by the app.
+
+- MCP server: `mcp-server/person-crud-server.mjs`
+- Setup instructions page: `/mcp-setup`
+- Live MCP demo and test UI: `/mcp-demo`
+- Existing app CRUD path: `/` (UI) and `/api/people`
+
+### MCP Tools
+
+- `list_people`
+- `get_person`
+- `create_person`
+- `update_person`
+- `delete_person`
 
 ## How It Works (Next.js 16 & React 19.2)
 

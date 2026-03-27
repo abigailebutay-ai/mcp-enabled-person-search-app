@@ -6,29 +6,22 @@ import { User } from '@/app/actions/schemas'
 
 export function useUser(userId: string | null) {
   const [user, setUser] = useState<User | null>(null)
+  const applyUser = (fetchedUser: User | null) => setUser(fetchedUser)
 
   useEffect(() => {
     if (userId) {
       getUserById(userId).then(fetchedUser => {
-        if (fetchedUser) {
-          setUser(fetchedUser)
-        } else {
-          setUser(null)
-        }
+        applyUser(fetchedUser ?? null)
       })
     } else {
-      setUser(null)
+      queueMicrotask(() => applyUser(null))
     }
   }, [userId])
 
   const mutate = () => {
     if (userId) {
       getUserById(userId).then(fetchedUser => {
-        if (fetchedUser) {
-          setUser(fetchedUser)
-        } else {
-          setUser(null)
-        }
+        applyUser(fetchedUser ?? null)
       })
     }
   }

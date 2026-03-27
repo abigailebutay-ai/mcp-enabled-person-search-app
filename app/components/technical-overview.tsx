@@ -8,11 +8,11 @@ export function TechnicalOverview() {
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground">
-          The search functionality is implemented using a server action, which searches an array of pre-populated user data. The AsyncSelect component sends the search query to the server action, which filters the users based on a{" "}
+          The search functionality is implemented using a server action backed by PostgreSQL through Prisma. The AsyncSelect component sends the search query to the server action, which filters persisted users based on a{" "}
           <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
             startsWith
           </code>
-          {" "}matching logic. When a user is selected from the dropdown, their details are displayed in a card component.
+          {" "}matching logic. This same User model is also exposed by the MCP server for Claude Desktop CRUD operations and by the in-app MCP demo tester.
         </p>
       </CardContent>
     </Card>

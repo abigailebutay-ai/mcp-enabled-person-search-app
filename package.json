@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "npx prisma generate && next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "mcp:server": "node mcp-server/person-crud-server.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.0",
     "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "5.20.0",
     "@radix-ui/react-accordion": "^1.2.2",

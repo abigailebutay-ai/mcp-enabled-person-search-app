@@ -19,8 +19,9 @@ export async function searchUsers(query: string): Promise<User[]> {
         })
         console.log('Search results:', results)
         return results
-    } catch (error: any) {
-        if (error?.code === 'P1011' || !process.env.DATABASE_URL) {
+    } catch (error: unknown) {
+        const prismaError = error as { code?: string }
+        if (prismaError?.code === 'P1011' || !process.env.DATABASE_URL) {
             console.warn('Database not available during build')
             return []
         }
